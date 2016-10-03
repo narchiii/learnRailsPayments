@@ -14,25 +14,40 @@
             </ul>
         </article>
         <aside id="details-aside" class="col-sm-4">
-            <a id="btn-buy" href="receipt.html" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-ok"></span>Get it!</a>
-                            <%= form_tag charges_path do %>
-                  <article>
+
+
+                            <%= form_tag charges_path, id:'chargeForm' do %>
+
                     <% if flash[:error].present? %>
                       <div id="error_explanation">
                         <p><%= flash[:error] %></p>
                       </div>
                     <% end %>
-                    <label class="amount">
-                      <span>Amount: $5.00</span>
-                    </label>
-                  </article>
 
-                  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                          data-description="A month's subscription"
-                          data-amount="500"
-                          data-locale="auto"></script>
-                <% end %>
+                  <script src="https://checkout.stripe.com/checkout.js"></script>
+                  <%= hidden_field_tag 'stripeToken' %>
+                  <%= hidden_field_tag 'amount', 499 %>
+                  <%= hidden_field_tag 'stripeEmail' %>
+                  <button id="btn-buy" type="button" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-ok"></span>Buy this!</button>
+<script>
+    var handler = StripeCheckout.configure({
+      key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+      token: function(token, arg) {
+        document.getElementById("stripeToken").value = token.id;
+        document.getElementById("stripeEmail").value = token.email;
+        document.getElementById("chargeForm").submit();
+      }
+});
+document.getElementById('btn-buy').addEventListener('click', function(e) {
+      handler.open({
+        name: 'Learn Rails',
+        description: 'Buy this item for ($4.99)',
+        amount: 499
+    });
+    e.preventDefault();
+   })
+</script>
+<% end %>
             <ul id="details-infobox" class="list-group">
               <li class="list-group-item active clearfix">Info</li>
               <li class="list-group-item">What You Get</li>
