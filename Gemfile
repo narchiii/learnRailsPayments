@@ -20,6 +20,12 @@ gem 'stripe', :git =>'https://github.com/stripe/stripe-ruby'
 # Figaro to securely configure App
 gem 'figaro'
 
+# activeadmin for admin system
+gem 'activeadmin', github: 'gregbell/active_admin'
+
+# devise for user authentication
+gem 'devise'
+
 # add twitter bootstrap
 gem 'bootstrap-sass'
 
