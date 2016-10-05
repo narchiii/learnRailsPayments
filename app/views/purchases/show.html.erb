@@ -1,2 +1,24 @@
-<p> This is your purchase </p>
-<p>Your purchase is <%= @purchase.inspect %></p>
+   <section id="content-receipt" class="clearfix">
+      <div id="receipt-container">
+        <div class="dotmatrix left"></div>
+        <div id="receipt-content">
+          <h4 id="receipt-title">Thank You!</h4>
+          <p><strong>RECEIPT</strong></p>
+          <div id="receipt-details" class="row clearfix">
+            <div class="col-sm-8 receipt-left">
+              <p><strong class="font-weight-heavy">Your Product</strong><br/> <span class="font-weight-light">What you sold</span></p>
+            </div>
+            <div class="col-sm-4">
+              $4.99
+            </div>
+          </div>
+
+          <a href="https://s3-us-west-2.amazonaws.com/rails-learnapp-bucket/kitty.JPG"><button type="button" class="btn btn-success btn-xs">DOWNLOAD</button></a>
+          <footer id="receipt-footer">
+            <small>Your purchase is complete. We hope you enjoy it!</small>
+          </footer>
+        </div>
+        <div class="dotmatrix right"></div>
+      </div>
+      <div id="receipt-shadow"></div>
+    </section>
