@@ -21,7 +21,8 @@ gem 'stripe', :git =>'https://github.com/stripe/stripe-ruby'
 gem 'figaro'
 
 # activeadmin for admin system
-gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'activeadmin', github: 'activeadmin'
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 
 # devise for user authentication
 gem 'devise'
