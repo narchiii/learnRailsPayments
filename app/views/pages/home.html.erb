@@ -1,17 +1,9 @@
     <section id="content-details" class="row clearfix">
         <article id="details-article" class="col-sm-8">
-            <h1 id="article-title">Learn App Code <span class="font-weight-light">.com</span></h1>
+            <h1 id="article-title"><%= @product.title %><span class="font-weight-light"><%= @product.subtitle %></span></h1>
            
 
-            <p>Lorem ipsum dolor sit amet, in nam feugiat eleifend. Sea an possit offendit definiebas, usu cu aeque mediocritatem. Vis constituam suscipiantur ad, cum duis concludaturque no. Sea vocent consulatu at.</p>
-
-            <p>Lorem ipsum dolor sit amet, pri id tractatos torquatos, eruditi alienum eam ad. Sint graeci mel te. Ex eius corrumpit.</p>
-            <p><strong>What You Get</strong></p>
-            <ul class="no-indent">
-                <li>Lorem ipsum dolor sit.</li>
-                <li>Lorem ipsum dolor sit amet, cum.</li>
-                <li>Lorem ipsum dolor sit amet, quo ne etiam.</li>
-            </ul>
+        <%= raw @product.description %>
         </article>
         <aside id="details-aside" class="col-sm-4">
 
@@ -26,7 +18,7 @@
 
                   <script src="https://checkout.stripe.com/checkout.js"></script>
                   <%= hidden_field_tag 'stripeToken' %>
-                  <%= hidden_field_tag 'amount', 499 %>
+                  <%= hidden_field_tag 'amount', @product.price %>
                   <%= hidden_field_tag 'stripeEmail' %>
                   <button id="btn-buy" type="button" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-ok"></span>Buy this!</button>
 <script>
@@ -41,7 +33,7 @@
 document.getElementById('btn-buy').addEventListener('click', function(e) {
       handler.open({
         name: 'Learn Rails',
-        description: 'Buy this item for ($4.99)',
+        description: '<%= @product.title %> ($<%= @product.price %>)',
         amount: document.getElementById("amount").value
     });
     e.preventDefault();
