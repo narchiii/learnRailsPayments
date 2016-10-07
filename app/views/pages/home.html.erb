@@ -18,7 +18,7 @@
 
                   <script src="https://checkout.stripe.com/checkout.js"></script>
                   <%= hidden_field_tag 'stripeToken' %>
-                  <%= hidden_field_tag 'amount', @product.price %>
+                  <%= hidden_field_tag 'amount', @product.price_in_cents %>
                   <%= hidden_field_tag 'stripeEmail' %>
                   <button id="btn-buy" type="button" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-ok"></span>Buy this!</button>
 <script>
@@ -42,8 +42,7 @@ document.getElementById('btn-buy').addEventListener('click', function(e) {
 <% end %>
             <ul id="details-infobox" class="list-group">
               <li class="list-group-item active clearfix">Info</li>
-              <li class="list-group-item">What You Get</li>
-              <li class="list-group-item">This Is Included</li>
+              <li class="list-group-item"><%= @product.info %></li>
             </ul>
         </aside>
     </section>

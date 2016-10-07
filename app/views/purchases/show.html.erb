@@ -6,10 +6,10 @@
           <p><strong>RECEIPT</strong></p>
           <div id="receipt-details" class="row clearfix">
             <div class="col-sm-8 receipt-left">
-              <p><strong class="font-weight-heavy">Your Product</strong><br/> <span class="font-weight-light">What you sold</span></p>
+              <p><strong class="font-weight-heavy"><%= @product.title %></strong><br/> <span class="font-weight-light"><%= @product.subtitle %></span></p>
             </div>
             <div class="col-sm-4">
-              $4.99
+             $<%= @product.price %>
             </div>
           </div>
 
