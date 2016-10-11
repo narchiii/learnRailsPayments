@@ -1,0 +1,49 @@
+    <section id="content-details" class="row clearfix">
+        <article id="details-article" class="col-sm-8">
+            <h1 id="article-title"><%= @product.title %><span class="font-weight-light"><%= @product.subtitle %></span></h1>
+           
+
+        <%= raw @product.description %>
+        </article>
+        <aside id="details-aside" class="col-sm-4">
+
+
+                            <%= form_tag charges_path, id:'chargeForm' do %>
+
+                    <% if flash[:error].present? %>
+                      <div id="error_explanation">
+                        <p><%= flash[:error] %></p>
+                      </div>
+                    <% end %>
+
+                  <script src="https://checkout.stripe.com/checkout.js"></script>
+                  <%= hidden_field_tag 'stripeToken' %>
+                  <%= hidden_field_tag 'amount', @product.price_in_cents %>
+                  <%= hidden_field_tag 'stripeEmail' %>
+                  <%= hidden_field_tag 'product_id', @product.id %>
+                  <button id="btn-buy" type="button" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-ok"></span>Buy this!</button>
+<script>
+    var handler = StripeCheckout.configure({
+      key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+      token: function(token, arg) {
+        document.getElementById("stripeToken").value = token.id;
+        document.getElementById("stripeEmail").value = token.email;
+        document.getElementById("chargeForm").submit();
+      }
+});
+document.getElementById('btn-buy').addEventListener('click', function(e) {
+      handler.open({
+        name: 'Learn Rails',
+        description: '<%= @product.title %> ($<%= @product.price %>)',
+        amount: document.getElementById("amount").value
+    });
+    e.preventDefault();
+   })
+</script>
+<% end %>
+            <ul id="details-infobox" class="list-group">
+              <li class="list-group-item active clearfix">Info</li>
+              <li class="list-group-item"><%= @product.info %></li>
+            </ul>
+        </aside>
+    </section>
